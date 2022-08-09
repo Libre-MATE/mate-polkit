@@ -24,31 +24,38 @@
 #define __POLKIT_MATE_AUTHENTICATOR_H
 
 #include <glib-object.h>
+#include <polkit/polkit.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define POLKIT_MATE_TYPE_AUTHENTICATOR          (polkit_mate_authenticator_get_type())
-#define POLKIT_MATE_AUTHENTICATOR(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), POLKIT_MATE_TYPE_AUTHENTICATOR, PolkitMateAuthenticator))
-#define POLKIT_MATE_AUTHENTICATOR_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), POLKIT_MATE_TYPE_AUTHENTICATOR, PolkitMateAuthenticatorClass))
-#define POLKIT_MATE_AUTHENTICATOR_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), POLKIT_MATE_TYPE_AUTHENTICATOR, PolkitMateAuthenticatorClass))
-#define POLKIT_MATE_IS_AUTHENTICATOR(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), POLKIT_MATE_TYPE_AUTHENTICATOR))
-#define POLKIT_MATE_IS_AUTHENTICATOR_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), POLKIT_MATE_TYPE_AUTHENTICATOR))
+#define POLKIT_MATE_TYPE_AUTHENTICATOR (polkit_mate_authenticator_get_type())
+#define POLKIT_MATE_AUTHENTICATOR(o)                               \
+  (G_TYPE_CHECK_INSTANCE_CAST((o), POLKIT_MATE_TYPE_AUTHENTICATOR, \
+                              PolkitMateAuthenticator))
+#define POLKIT_MATE_AUTHENTICATOR_CLASS(k)                      \
+  (G_TYPE_CHECK_CLASS_CAST((k), POLKIT_MATE_TYPE_AUTHENTICATOR, \
+                           PolkitMateAuthenticatorClass))
+#define POLKIT_MATE_AUTHENTICATOR_GET_CLASS(o)                    \
+  (G_TYPE_INSTANCE_GET_CLASS((o), POLKIT_MATE_TYPE_AUTHENTICATOR, \
+                             PolkitMateAuthenticatorClass))
+#define POLKIT_MATE_IS_AUTHENTICATOR(o) \
+  (G_TYPE_CHECK_INSTANCE_TYPE((o), POLKIT_MATE_TYPE_AUTHENTICATOR))
+#define POLKIT_MATE_IS_AUTHENTICATOR_CLASS(k) \
+  (G_TYPE_CHECK_CLASS_TYPE((k), POLKIT_MATE_TYPE_AUTHENTICATOR))
 
 typedef struct _PolkitMateAuthenticator PolkitMateAuthenticator;
 typedef struct _PolkitMateAuthenticatorClass PolkitMateAuthenticatorClass;
 
-GType                      polkit_mate_authenticator_get_type   (void) G_GNUC_CONST;
-PolkitMateAuthenticator  *polkit_mate_authenticator_new        (const gchar              *action_id,
-                                                                  const gchar              *message,
-                                                                  const gchar              *icon_name,
-                                                                  PolkitDetails            *details,
-                                                                  const gchar              *cookie,
-                                                                  GList                    *identities);
-void                       polkit_mate_authenticator_initiate   (PolkitMateAuthenticator *authenticator);
-void                       polkit_mate_authenticator_cancel     (PolkitMateAuthenticator *authenticator);
-const gchar               *polkit_mate_authenticator_get_cookie (PolkitMateAuthenticator *authenticator);
+GType polkit_mate_authenticator_get_type(void) G_GNUC_CONST;
+PolkitMateAuthenticator *polkit_mate_authenticator_new(
+    const gchar *action_id, const gchar *message, const gchar *icon_name,
+    PolkitDetails *details, const gchar *cookie, GList *identities);
+void polkit_mate_authenticator_initiate(PolkitMateAuthenticator *authenticator);
+void polkit_mate_authenticator_cancel(PolkitMateAuthenticator *authenticator);
+const gchar *polkit_mate_authenticator_get_cookie(
+    PolkitMateAuthenticator *authenticator);
 
 #ifdef __cplusplus
 }
