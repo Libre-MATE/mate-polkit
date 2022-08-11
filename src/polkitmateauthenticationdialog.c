@@ -446,52 +446,6 @@ static GtkWidget *add_row(GtkWidget *grid, int row, const char *label_text,
 }
 
 static void action_id_activated(GtkLabel *url_label, gpointer user_data) {
-#if 0
-  GError *error;
-  DBusGConnection *bus;
-  DBusGProxy *manager_proxy;
-
-  error = NULL;
-  bus = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
-  if (bus == NULL)
-    {
-      g_warning ("Couldn't connect to session bus: %s", error->message);
-      g_error_free (error);
-      goto out;
-    }
-
-  manager_proxy = dbus_g_proxy_new_for_name (bus,
-                                             "org.mate.PolicyKit.AuthorizationManager",
-                                             "/",
-                                             "org.mate.PolicyKit.AuthorizationManager.SingleInstance");
-  if (manager_proxy == NULL)
-    {
-      g_warning ("Could not construct manager_proxy object; bailing out");
-      goto out;
-    }
-
-  if (!dbus_g_proxy_call (manager_proxy,
-                          "ShowAction",
-                          &error,
-                          G_TYPE_STRING, gtk_label_get_current_uri (GTK_LABEL (url_label)),
-                          G_TYPE_INVALID,
-                          G_TYPE_INVALID))
-    {
-      if (error != NULL)
-        {
-          g_warning ("Failed to call into manager: %s", error->message);
-          g_error_free (error);
-        }
-      else
-        {
-          g_warning ("Failed to call into manager");
-        }
-      goto out;
-    }
-
-out:
-        ;
-#endif
 }
 
 static void polkit_mate_authentication_dialog_init(

@@ -97,22 +97,6 @@ static void on_status_icon_popup_menu(GtkStatusIcon *status_icon, guint button,
 #endif
 
 static void update_temporary_authorization_icon_real(void) {
-#if 0
-  GList *l;
-  g_debug ("have %d tmp authorizations", g_list_length (current_temporary_authorizations));
-  for (l = current_temporary_authorizations; l != NULL; l = l->next)
-    {
-      PolkitTemporaryAuthorization *authz = POLKIT_TEMPORARY_AUTHORIZATION (l->data);
-
-      g_debug ("have tmp authz for action %s (subject %s) with id %s (obtained %d, expires %d)",
-               polkit_temporary_authorization_get_action_id (authz),
-               polkit_subject_to_string (polkit_temporary_authorization_get_subject (authz)),
-               polkit_temporary_authorization_get_id (authz),
-               (gint) polkit_temporary_authorization_get_time_obtained (authz),
-               (gint) polkit_temporary_authorization_get_time_expires (authz));
-    }
-#endif
-
   /* TODO:
    *
    * - we could do something fancy like displaying a window with the tmp authz
