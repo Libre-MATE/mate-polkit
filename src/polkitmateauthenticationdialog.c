@@ -310,7 +310,7 @@ static void create_user_combobox(PolkitMateAuthenticationDialog *dialog) {
   gtk_combo_box_set_active(GTK_COMBO_BOX(combo), selected_index);
 
   /* Listen when a new user is selected */
-  g_signal_connect(GTK_WIDGET(combo), "changed",
+  g_signal_connect(combo, "changed",
                    G_CALLBACK(user_combobox_changed), dialog);
 }
 
