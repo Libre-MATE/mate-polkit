@@ -1,5 +1,5 @@
 AC_INIT([polkit-mate],[1.26.0],[https://github.com/Libre-MATE/mate-polkit],[mate-polkit])
-
+AC_COPYRIGHT([Copyright (C) 2022 Libre MATE])
 AM_INIT_AUTOMAKE([1.9 foreign dist-xz no-dist-gzip check-news])
 
 AC_CONFIG_SRCDIR([src])
