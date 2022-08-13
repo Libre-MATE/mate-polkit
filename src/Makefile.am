@@ -6,7 +6,7 @@ desktop_in_files = polkit-mate-authentication-agent-1.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 polkit-mate-authentication-agent-1.desktop.in : polkit-mate-authentication-agent-1.desktop.in.in Makefile
-	$(AM_V_GEN)sed \
+	$(AM_V_GEN)$(SED) \
 		-e "s|\@FULL_LIBEXECDIR\@|$(FULL_LIBEXECDIR)|" \
 		$< > $@
 
