@@ -16,16 +16,13 @@
 # 02110-1301, USA.
 
 AC_INIT([polkit-mate],[1.26.0],[https://github.com/Libre-MATE/mate-polkit],[mate-polkit])
+AC_PREREQ(2.60)
 AC_COPYRIGHT([Copyright (C) 2022 Libre MATE])
-AM_INIT_AUTOMAKE([1.9 foreign dist-xz no-dist-gzip check-news])
-
+AM_INIT_AUTOMAKE([1.11 foreign dist-xz no-dist-gzip silent-rules check-news])
 AC_CONFIG_SRCDIR([src])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
-
 AM_MAINTAINER_MODE([enable])
-
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 # libtool versioning - this applies to all libraries in this package
 #
