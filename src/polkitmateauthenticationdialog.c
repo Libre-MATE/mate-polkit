@@ -650,15 +650,13 @@ static void polkit_mate_authentication_dialog_constructed(GObject *object) {
   /* TODO: sort keys? */
   rows = 0;
   if (dialog->priv->details != NULL) {
-    gint n;
-    gchar **keys;
+    gchar **keys, **it;
 
     keys = polkit_details_get_keys(dialog->priv->details);
-    for (n = 0; keys[n] != NULL; n++) {
-      const gchar *key = keys[n];
+    for (it = keys; *it; it++, rows++) {
       const gchar *value;
 
-      value = polkit_details_lookup(dialog->priv->details, key);
+      value = polkit_details_lookup(dialog->priv->details, *it);
 
       label = gtk_label_new(NULL);
       s = g_strdup_printf("<small>%s</small>", value);
@@ -668,11 +666,9 @@ static void polkit_mate_authentication_dialog_constructed(GObject *object) {
       gtk_label_set_xalign(GTK_LABEL(label), 0.0);
       gtk_label_set_yalign(GTK_LABEL(label), 1.0);
 
-      s = g_strdup_printf("<small><b>%s:</b></small>", key);
+      s = g_strdup_printf("<small><b>%s:</b></small>", *it);
       add_row(grid, rows, s, label);
       g_free(s);
-
-      rows++;
     }
     g_strfreev(keys);
   }
