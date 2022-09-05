@@ -298,9 +298,17 @@ static gboolean register_client_to_gnome_session(void) {
 }
 
 int main(int argc, char **argv) {
-  gint ret;
+  int ret;
   PolkitAgentListener *listener;
   GError *error;
+
+#ifdef ENABLE_NLS
+  bindtextdomain(GETTEXT_PACKAGE, MATELOCALEDIR);
+#if HAVE_BIND_TEXTDOMAIN_CODESET
+  bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+#endif
+  textdomain(GETTEXT_PACKAGE);
+#endif /* ENABLE_NLS */
 
   gtk_init(&argc, &argv);
 
@@ -309,12 +317,6 @@ int main(int argc, char **argv) {
   listener = NULL;
   session = NULL;
   ret = 1;
-
-  bindtextdomain(GETTEXT_PACKAGE, MATELOCALEDIR);
-#if HAVE_BIND_TEXTDOMAIN_CODESET
-  bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
-#endif
-  textdomain(GETTEXT_PACKAGE);
 
   loop = g_main_loop_new(NULL, FALSE);
 
